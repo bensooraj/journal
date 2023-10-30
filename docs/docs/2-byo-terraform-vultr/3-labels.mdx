@@ -1,0 +1,92 @@
+---
+sidebar_position: 3
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Labels
+
+Let's add one more block to our configuration,
+```hcl title="test.hcl"
+griffon {
+	region = "nyc1"
+	vultr_api_key = "1234567890"
+}
+// highlight-start
+ssh_key "my_key" {
+	ssh_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADA"
+}
+// highlight-end
+```
+
+The block `ssh_key` is different from `griffon`; it has a `label` with value `my_key`. To parse a label, we must append `label` to the struct field's tag as shown below,
+```go title="config.go"
+type SSHKeyBlock struct {
+    // highlight-start
+	Name   string `hcl:"name,label"`
+    // highlight-end
+	SSHKey string `hcl:"ssh_key"`
+}
+```
+
+Following is another example of an HCL block with multi-level labels (two levels deep) and its representation using Golang struct and field tags,
+<Tabs>
+<TabItem value="hcl" label="HCL" default>
+
+```hcl title="test.hcl"
+resource "ssh_key" "my_key" {
+	ssh_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADA"
+}
+```
+
+</TabItem>
+<TabItem value="golang" label="Golang">
+
+```go title="config.go"
+type Config struct {
+  // previous code...
+	ResourceBlocks []ResourceBlock `hcl:"resource,block"`
+}
+type ResourceBlock struct {
+  // highlight-start
+	Type   string `hcl:"type,label"`
+	Name   string `hcl:"name,label"`
+  // highlight-end
+	SSHKey string `hcl:"ssh_key"`
+}
+```
+
+</TabItem>
+<TabItem value="golang-test" label="Golang Test">
+
+```go title="parser_test.go"
+func TestParseResourceBlock(t *testing.T) {
+	src := []byte(`
+	griffon {
+		region = "nyc1"
+		vultr_api_key = "1234567890"
+	}
+	resource "ssh_key" "my_key" {
+		ssh_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADA"
+	}`)
+
+	config, err := ParseHCL("test.hcl", src)
+	require.NoError(t, err)
+
+	require.Lenf(t, config.ResourceBlocks, 1, "len(ResourceBlocks); got %d, want 1", len(config.ResourceBlocks))
+
+	require.Equalf(t, ResourceBlock{
+		Type:   "ssh_key",
+		Name:   "my_key",
+		SSHKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADA",
+	}, config.ResourceBlocks[0], "ResourceBlock parsed incorrectly")
+}
+```
+
+</TabItem>
+</Tabs>
+
+We will implement this for the `data` blocks in a future section.
+
+## Pull request/Commits
+1. [PR | block `ssh_key` with label](https://github.com/bensooraj/griffon/pull/2/files)

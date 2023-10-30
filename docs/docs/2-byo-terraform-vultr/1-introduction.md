@@ -31,7 +31,6 @@ data "os" "centos" {
 }
 
 ssh_key "my_key" {
-    name = "my_key"
     ssh_key = file("~/.ssh/id_rsa.pub")
 }
 
