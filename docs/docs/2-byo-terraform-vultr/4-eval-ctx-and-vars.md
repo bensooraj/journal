@@ -84,7 +84,7 @@ FAIL    github.com/bensooraj/griffon    0.474s
 FAIL
 ```
 
-In order for the parser to understand `AMS` as a variable, we will create an instance of `hcl.EvalContext` and pass it to `hclsimple.Decode(filename string, src []byte, ctx *hcl.EvalContext, target interface{}) error` as a the third argument.
+In order for the parser to understand `AMS` as a variable, we will create an instance of `hcl.EvalContext` and pass it to `hclsimple.Decode(filename string, src []byte, ctx *hcl.EvalContext, target interface{}) error` as a the third argument ([`0863a4b`](https://github.com/bensooraj/griffon/commit/0863a4bbae5e838869fb805a9ae7a1f917df8268)).
 
 ```go title="parser.go"
 // highlight-start
@@ -108,7 +108,7 @@ func getEvalContext() *hcl.EvalContext {
 }
 ```
 
-We can also use these variables as template strings as shown below,
+We can also use these variables as template strings ([`cfd6327`](https://github.com/bensooraj/griffon/commit/cfd6327ad86c3b733d1688e689b12ed6c87de437)) as shown below,
 
 <Tabs>
 <TabItem value="hcl-example-1" label="Example 1" default>
@@ -150,7 +150,7 @@ griffon {
 }
 ```
 
-We will use the method `func cty.ObjectVal(attrs map[string]cty.Value) cty.Value` to further nest key-value pairs and attach to `(hcl.EvalContext).Variables` as shown below,
+We will use the method `func cty.ObjectVal(attrs map[string]cty.Value) cty.Value` to further nest key-value pairs and attach to `(hcl.EvalContext).Variables` as shown below ([`650a749`](https://github.com/bensooraj/griffon/commit/650a749799cceb60ff818a3ffdcc5e938790d513)),
 
 ```go title="parser.go"
 func getEvalContext() *hcl.EvalContext {
@@ -167,3 +167,6 @@ func getEvalContext() *hcl.EvalContext {
 	}
 }
 ```
+
+## Pull request/Commits
+1. [PR | Parse `Variables` with `hcl.EvalContext`](https://github.com/bensooraj/griffon/pull/3/files)
