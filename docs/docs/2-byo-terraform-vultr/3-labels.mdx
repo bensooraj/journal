@@ -29,6 +29,10 @@ type SSHKeyBlock struct {
 }
 ```
 
+:::info
+The struct field labels consist of two comma-separated values. The first is the name of the corresponding argument or block type as it will appear in the input file, and the second is the type of element being named. If the second value is omitted, it defaults to attr, requesting an attribute. (*source*: [*Decoding Into Native Go Values*](https://hcl.readthedocs.io/en/latest/go_decoding_gohcl.html#decoding-into-native-go-values))
+:::
+
 Following is another example of an HCL block with multi-level labels (two levels deep) and its representation using Golang struct and field tags,
 <Tabs>
 <TabItem value="hcl" label="HCL" default>
