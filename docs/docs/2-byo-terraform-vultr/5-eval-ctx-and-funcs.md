@@ -12,7 +12,7 @@ This is a continuation of the [previous chapter](./eval-ctx-and-vars). Just like
 There are a number of [`standard library functions`](https://pkg.go.dev/github.com/zclconf/go-cty/cty/function/stdlib#pkg-functions) available in a [`stdlib`](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib) package within the [`cty`](https://github.com/zclconf/go-cty) repository, avoiding the need for each application to re-implement basic functions for string manipulation, list manipulation, etc. It also includes function-shaped versions of several operations that are native operators in HCL, which should generally not be exposed as functions in HCL-based configurationf formats to avoid user confusion. (source: [Expression Evaluation | Defining Functions](https://hcl.readthedocs.io/en/latest/go_expression_eval.html#defining-functions))
 :::
 
-We can call the `stblib` functions by attaching the ones we need to `hcl.EvalContext`,
+We can call the `stblib` functions by attaching the ones we need to `hcl.EvalContext` ([`1d3e817`](https://github.com/bensooraj/griffon/commit/1d3e8173e500ca720f2a8cf348cea30e12398e41)),
 ```go title="parser.go"
 func getEvalContext() *hcl.EvalContext {
 	// ...
@@ -57,7 +57,7 @@ ssh_key "my_key" {
 }
 ```
 
-we can define a custom funtion named `file`,
+we can define a custom funtion named `file` ([`b06d2e0`](https://github.com/bensooraj/griffon/commit/b06d2e02bf7939c51a4f6faf34c241cc38397ae2)),
 ```go title="parser.go"
 func getEvalContext() *hcl.EvalContext {
 
