@@ -88,7 +88,6 @@ In order for the parser to understand `AMS` as a variable, we will create an ins
 
 ```go title="parser.go"
 // highlight-start
-// highlight-start
 func ParseHCL(filename string, src []byte, ctx *hcl.EvalContext) (*Config, error) {
     // highlight-end
     // ...
