@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -89,3 +89,6 @@ func getEvalContext() *hcl.EvalContext {
 	}
 }
 ```
+
+## Pull request/Commits
+1. [PR | Parse `Functions`: built-ins and custom](https://github.com/bensooraj/griffon/pull/4/files)
