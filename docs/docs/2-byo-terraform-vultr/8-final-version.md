@@ -5,7 +5,9 @@ sidebar_position: 8
 # Final version
 The proof-of-concept terraform-like IaC tool for Vultr is now complete. The goal was to understand HCL parsing, partial evaluation, resource creation etc. I do have a basic understanding now. Following is a brief video that showcases just that,
 
-I wouldn't be continuing this series.
+:::danger
+**I won't be continuing this series.**
+:::
 
 ## Resources
 1. [HCL Config Language Toolkit](https://hcl.readthedocs.io/en/latest/index.html)
