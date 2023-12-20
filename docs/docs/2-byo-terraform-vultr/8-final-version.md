@@ -4,9 +4,10 @@ sidebar_position: 8
 
 # Final version
 The proof-of-concept terraform-like IaC tool for Vultr is now complete. The goal was to understand HCL parsing, partial evaluation, resource creation etc. I do have a basic understanding now. Following is a brief video that showcases just that,
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pMChGOwHOc8?si=dtY80cKgX1DFsxPN&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 :::danger
-**I won't be continuing this series.**
+**I won't be continuing this series anymore.**
 :::
 
 ## Resources
